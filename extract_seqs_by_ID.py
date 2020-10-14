@@ -7,14 +7,14 @@ def usage():
     """)
 
 input_file = sys.argv[1]
-gene_of_interest = sys.argv[2]
+gene_of_interest = sys.argv[2].lower()
 output_file = sys.argv[3]
 
 inhandle = SeqIO.parse(input_file, 'fasta')
 outhandle = open(output_file, 'w')
 
 for s in inhandle:
-    if gene_of_interest in s.description:
+    if gene_of_interest in s.description.lower().split():
         outhandle.write(">{id}\n{seq}\n".format(id=s.description, seq=str(s.seq)))
 
 outhandle.close() 
